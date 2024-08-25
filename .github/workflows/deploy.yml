@@ -1,0 +1,35 @@
+name: Deploy Angular to S3
+
+on:
+  push:
+    branches: [deploy-to-S3]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular project
+        run: ng build
+
+      - name: Deploy to S3
+        uses: aws-actions/s3-sync-action@v1.1.0
+        with:
+          bucket: ${{secrets.S3_BUCKET_NAME}}
+          region: ${{secrets.AWS_REGION}}
+          source_dir: dist/order-ui
+          delete: true
+        env:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
