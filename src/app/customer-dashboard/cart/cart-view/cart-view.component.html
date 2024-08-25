@@ -1,0 +1,114 @@
+<div class="container-sm" *ngIf="cart || isEmptyCart">
+  <h1>Your Cart</h1>
+  <div class="cart-layout">
+    <div class="cart-items">
+      <mat-card
+        class="cart-items-wrapper"
+        *ngIf="!isEmptyCart; else noItemsTemplate"
+      >
+        <div class="top-select-all">
+          <mat-checkbox
+            [(ngModel)]="allSelected"
+            (change)="toggleSelectAll($event.checked)"
+            class="select-all-checkbox"
+          >
+            {{ allSelected ? "Deselect All Items" : "Select All Items" }}
+          </mat-checkbox>
+        </div>
+        <div
+          *ngFor="let item of cart.cartItems; let i = index"
+          class="cart-item"
+        >
+          <mat-card-content class="cart-item-content">
+            <div class="left-side">
+              <mat-checkbox
+                [(ngModel)]="selectedItems[i].selected"
+                (change)="toggleSelection(item.productId, $event.checked)"
+              >
+              </mat-checkbox>
+              <img
+                mat-card-avatar
+                [src]="item.imageUrl"
+                alt="{{ item.productName }}"
+                class="product-image"
+              />
+              <span class="product-name">{{ item.productName }}</span>
+              <div class="cart-number" *ngIf="isEdit">
+                <span class="quantity">Quantity: {{ item.quantity }}</span>
+                <span class="unit-price"
+                  >Price: {{ item.unitPrice | currency }}</span
+                >
+              </div>
+            </div>
+
+            <div class="right-side">
+              <ng-container *ngIf="!isEdit[item.productId]; else editMode">
+                <!-- Default View with Edit and Delete Buttons -->
+                <button
+                  mat-button
+                  color="primary"
+                  (click)="toggleEdit(item.productId)"
+                >
+                  Edit
+                </button>
+                <button
+                  mat-button
+                  color="warn"
+                  (click)="deleteItem(cart.id,item.productId)"
+                >
+                  Delete
+                </button>
+              </ng-container>
+
+              <ng-template #editMode>
+                <!-- Edit Mode with app-cart-item-control -->
+                <app-cart-item-control
+                  [quantity]="item.quantity"
+                  [productId]="item.productId"
+                  [cartId]="cart.id"
+                  (quantityChange)="onQuantityChange($event)"
+                ></app-cart-item-control>
+                <button
+                  mat-button
+                  color="primary"
+                  (click)="toggleEdit(item.productId)"
+                >
+                  Done
+                </button>
+              </ng-template>
+            </div>
+          </mat-card-content>
+        </div>
+      </mat-card>
+    </div>
+    <div class="cart-summary" *ngIf="!isEmptyCart">
+      <mat-list>
+        <div class="summary">
+          <p *ngIf="">No item selected</p>
+          <app-price-summary
+            [totalPrice]="selectedTotalPrice"
+          ></app-price-summary>
+        </div>
+        <mat-list-item class="right-align-buttons">
+          <button mat-flat-button (click)="clearCart()">Clear</button>
+          <button
+            mat-raised-button
+            color="accent"
+            [disabled]="selectedTotalPrice === 0"
+            (click)="submitOrder(cart.id)"
+          >
+            Checkout
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <ng-template class="noItem" #noItemsTemplate>
+    <button mat-button (click)="navigateToProducts()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+      back to select products
+    </button>
+    <h2 style="padding: 30px;">No items found in cart</h2>
+  </ng-template>
+</div>

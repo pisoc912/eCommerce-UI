@@ -1,0 +1,70 @@
+<div class="container">
+  <p class="page-title">Product List</p>
+  <!-- Search Box-->
+   <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search Products</mat-label>
+      <input matInput placeholder="Search Products"
+             [matAutocomplete]="auto"
+             [(ngModel)]="searchQuery"
+             (ngModelChange)="onSearchChange($event)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+   </mat-form-field>
+   <!-- Category Filter -->
+    <mat-form-field>
+      <mat-select placeholder="Filter by Category" [(value)]="selectedCategory" (selectionChange)="onCategoryChange($event)">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  <div class="grid-container">
+    <mat-card *ngFor="let product of filteredProducts" class="product-card">
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="product.imageUrl" alt="Product image" />
+      <mat-card-content>
+        <p>{{ product.description }}</p>
+        <mat-chip-listbox>
+          <mat-chip [ngClass]="getCategoryColor(product.category)">{{product.category}}</mat-chip>
+        </mat-chip-listbox>
+        <div class="price-add-container">
+          <h2 class="price">{{ product.price | currency : "USD" }}</h2>
+          <div class="add-icon-container">
+            <ng-container *ngIf="!product.isInCart; else inCartTemplate">
+              <button
+                mat-fab
+                extended
+                color="accent"
+                (click)="addToCart(product)"
+              >
+                Add To Cart
+              </button>
+            </ng-container>
+            <ng-template #inCartTemplate>
+              <app-cart-item-control
+                [quantity]="getCartQuantity(product)"
+                [productId]="product.productId"
+                [cartId]="cartId"
+                (quantityChange)="onQuantityChange($event)"
+              >
+              </app-cart-item-control>
+            </ng-template>
+
+            <mat-icon
+              (click)="addToLike(product)"
+              [color]="product.isLiked ? 'accent' : ''"
+              >favorite</mat-icon
+            >
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.navbar{
+  padding: 0 60px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

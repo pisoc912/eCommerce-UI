@@ -1,0 +1,52 @@
+<div class="container-sm">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <p class="page-title">Your Order</p>
+    </mat-card-header>
+    <mat-card class="card-wrapper" *ngFor="let order of orders">
+      <mat-card-title>Order: {{ order.orderNumber }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ order.orderDate | date : "EEE, MMM,dd" }} | Total:
+        {{ order.totalPrice }}
+      </mat-card-subtitle>
+      <div class="order-status-wrapper">
+        <div>
+          <p>
+            Order Status:
+            <span
+              class="order-status"
+              [ngClass]="{
+                'pending-status': order.orderStatusEnum === 'PENDING',
+                'confirmed-status': order.orderStatusEnum === 'CONFIRMED',
+                'shipped-status': order.orderStatusEnum === 'SHIPPED',
+                'delivered-status': order.orderStatusEnum === 'DELIVERED',
+                'canceled-status': order.orderStatusEnum === 'CANCELED'
+              }"
+            >
+              {{ order.orderStatusEnum }}
+            </span>
+          </p>
+          <div class="img-avatar-container">
+            <div
+              class="img-avatar-wrapper"
+              *ngFor="let item of order.orderItems"
+            >
+              <img
+                mat-card-avatar
+                [src]="item.imageUrl"
+                [alt]="item.productName"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <mat-card-actions align="end">
+            <button mat-icon-button (click)="getOrderDetails(order.orderId)">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </mat-card-actions>
+        </div>
+      </div>
+    </mat-card>
+  </mat-card>
+</div>

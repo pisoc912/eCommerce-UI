@@ -1,0 +1,58 @@
+<mat-toolbar color="primary" class="navbar">
+  <mat-toolbar-row>
+    <h1 style="margin: 30px">E-commerce</h1>
+
+    <button mat-button>
+      <a href="/products" mat-button>
+        <mat-icon>shop_two</mat-icon>
+        Product</a
+      >
+    </button>
+
+    <button mat-button>
+      <a href="/cart" mat-button>
+        <ng-container *ngIf="cartNum > 0; else noBadge">
+          <mat-icon [matBadge]="cartNum">shopping_cart</mat-icon>
+        </ng-container>
+        <ng-template #noBadge>
+          <mat-icon>shopping_cart</mat-icon>
+        </ng-template>
+
+        Cart
+      </a>
+    </button>
+
+    <span class="spacer"></span>
+
+    <ng-container *ngIf="authService.isLoggedIn(); else loginRegister">
+      <button mat-button>
+        <a href="/profile" mat-button>Profile</a>
+      </button>
+
+      <button mat-button>
+        <a href="/like" mat-button>Like</a>
+      </button>
+
+      <button mat-button>
+        <a href="/order" mat-button>Order</a>
+      </button>
+
+      <button
+        *ngIf="authService.isLoggedIn()"
+        mat-button
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </ng-container>
+
+    <ng-template #loginRegister>
+      <button mat-button>
+        <a href="/login" mat-button>Login</a>
+      </button>
+      <button mat-button>
+        <a href="/register" mat-button>Register</a>
+      </button>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>

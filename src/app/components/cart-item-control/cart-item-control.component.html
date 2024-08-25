@@ -1,0 +1,12 @@
+<div class="cart-control">
+  <button mat-button color="primary" (click)="decrementQuantity()">
+    <mat-icon>remove</mat-icon>
+  </button>
+  <span class="cart-quantity">{{quantity}}</span>
+  <button mat-button color="primary" (click)="incrementQuantity()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <!-- <button mat-button color="warn" (click)="deleteCartItem()">
+    <mat-icon>delete</mat-icon>
+  </button> -->
+</div>

@@ -1,0 +1,15 @@
+.cart-control {
+  display: flex;
+  align-items: center;
+}
+
+.cart-control button:hover {
+  transform: scale(1.05);
+  background-color: azure;
+}
+
+.cart-quantity {
+  margin: 0 20px;
+  font-size: 16px;
+  font-weight: 600;
+}

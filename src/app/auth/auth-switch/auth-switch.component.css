@@ -1,0 +1,15 @@
+.auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  margin-bottom: 20px;
+}
+
+app-login,
+app-register {
+  display: block;
+}

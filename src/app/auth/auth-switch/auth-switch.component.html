@@ -1,0 +1,13 @@
+<div class="auth-container">
+  <button mat-button (click)="toggleForm()">
+    {{ isLogin ? 'Switch to Register' : 'Switch to Login' }}
+  </button>
+
+  <ng-container *ngIf="isLogin">
+    <app-login></app-login>
+  </ng-container>
+
+  <ng-container *ngIf="!isLogin">
+    <app-register></app-register>
+  </ng-container>
+</div>

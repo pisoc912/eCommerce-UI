@@ -1,0 +1,21 @@
+<mat-card-footer *ngIf="totalPrice">
+  <h2>Order Summary</h2>
+  <table class="summary-table">
+    <tr>
+      <th>Subtotal</th>
+      <td>{{ calculateSubtotal() | currency : "USD" }}</td>
+    </tr>
+    <tr>
+      <th>Shipping Fee</th>
+      <td>{{ shippingFee | currency : "USD" }}</td>
+    </tr>
+    <tr>
+      <th>Tax</th>
+      <td>{{ calculateTax() | currency : "USD" }}</td>
+    </tr>
+    <tr class="total-row">
+      <th>Total</th>
+      <td>{{ calculateTotal() | currency : "USD" }}</td>
+    </tr>
+  </table>
+</mat-card-footer>

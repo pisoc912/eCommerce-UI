@@ -1,1 +1,179 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+background-color: rgb(247, 243, 239) }
+
+.container{
+  padding: 50px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.container-sm{
+  padding: 50px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.container-md {
+  padding: 50px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.dashboard-container{
+    padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+      background-color: #b3e5fc;
+}
+.page-title {
+  padding: 20px 10px;
+  font-weight: 800;
+  font-size: xx-large;
+}
+
+/* order status */
+.order-status {
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 30px;
+
+}
+
+.pending-status {
+  color: orange;
+  background-color: lightyellow;
+}
+
+.confirmed-status {
+  color: blue;
+  background-color: lightblue;
+}
+
+.shipped-status {
+  color: green;
+  background-color: lightgreen;
+}
+
+.delivered-status {
+  color: darkgreen;
+  background-color: lightgreen;
+}
+
+.canceled-status {
+  color: red;
+  background-color: linen;
+}
+
+
+/* category color */
+.chip-blue {
+  background-color: #bbdefb !important;
+  /* Lighter Blue */
+  color: white !important;
+}
+
+.chip-green {
+  background-color: #c8e6c9 !important;
+  /* Lighter Green */
+  color: white !important;
+}
+
+.chip-orange {
+  background-color: #ffe0b2 !important;
+  /* Lighter Orange */
+  color: black !important;
+}
+
+.chip-red {
+  background-color: #ffcdd2 !important;
+  /* Lighter Red */
+  color: black !important;
+}
+
+.chip-purple {
+  background-color: #e1bee7 !important;
+  /* Lighter Purple */
+  color: black !important;
+}
+
+.chip-teal {
+  background-color: #b2dfdb !important;
+  /* Lighter Teal */
+  color: black !important;
+}
+
+.chip-pink {
+  background-color: #f8bbd0 !important;
+  /* Lighter Pink */
+  color: black !important;
+}
+
+.chip-yellow {
+  background-color: #fff9c4 !important;
+  /* Lighter Yellow */
+  color: black !important;
+}
+
+.chip-brown {
+  background-color: #d7ccc8 !important;
+  /* Lighter Brown */
+  color: black !important;
+}
+
+.chip-gray {
+  background-color: #f5f5f5 !important;
+  /* Lighter Gray */
+  color: black !important;
+}
+
+.chip-lime {
+  background-color: #f0f4c3 !important;
+  /* Lighter Lime */
+  color: black !important;
+}
+
+.chip-cyan {
+  background-color: #b2ebf2 !important;
+  /* Lighter Cyan */
+  color: black !important;
+}
+
+.chip-indigo {
+  background-color: #c5cae9 !important;
+  /* Lighter Indigo */
+  color: black !important;
+}
+
+.chip-amber {
+  background-color: #ffecb3 !important;
+  /* Lighter Amber */
+  color: black !important;
+}
+
+.chip-deep-purple {
+  background-color: #d1c4e9 !important;
+  /* Lighter Deep Purple */
+  color: black !important;
+}
+
+.chip-light-blue {
+  background-color: #b3e5fc !important;
+  /* Lighter Light Blue */
+  color: black !important;
+}
+
+.chip-deep-orange {
+  background-color: #ffccbc !important;
+  /* Lighter Deep Orange */
+  color: black !important;
+}
+
+.product-image-sm {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}

@@ -1,0 +1,80 @@
+<div class="container">
+  <button mat-button (click)="goBack()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <p class="page-title">Order Detail</p>
+  <div class="order-wrapper">
+    <div class="left-side">
+      <mat-card>
+        <mat-card-title>
+          {{ orderDetail.orderNumber }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ orderDetail.orderDate | date: 'EEE, MMM,dd' }} |
+          <span
+            class="order-status"
+            [ngClass]="{
+              'pending-status': orderDetail.orderStatus === 'PENDING',
+              'confirmed-status': orderDetail.orderStatus === 'CONFIRMED',
+              'shipped-status': orderDetail.orderStatus === 'SHIPPED',
+              'delivered-status': orderDetail.orderStatus === 'DELIVERED',
+              'canceled-status': orderDetail.orderStatus === 'CANCELED'
+            }"
+          >
+            {{ orderDetail.orderStatus }}
+          </span>
+        </mat-card-subtitle>
+        <mat-card-content *ngFor="let product of orderDetail.products">
+          <div class="order-detail">
+            <img
+              class="product-image-wrapper"
+              [src]="product.productImg"
+              [alt]="product.productName"
+            />
+            <div class="product-info">
+              <mat-chip>{{ product.productCategory }}</mat-chip>
+              <mat-card-title>{{ product.productName }}</mat-card-title>
+              <h4>Price: {{ product.productPrice | currency: 'USD' }}</h4>
+            </div>
+            <div class="product-quantity">
+              <p>
+                Quantity:
+                <span>{{ product.quantity }}</span>
+              </p>
+              <p>
+                Total Price:
+                <span>{{ product.quantity * product.productPrice }}</span>
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="right-side">
+      <mat-card>
+        <div class="button-group">
+          <button
+            mat-raised-button
+            color="warn"
+            *ngIf="orderDetail.orderStatus !== 'PENDING'"
+            (click)="reorder(orderId)"
+          >
+            Reorder
+          </button>
+          <button
+            mat-raised-button
+            *ngIf="orderDetail.orderStatus === 'PENDING'"
+            (click)="cancelOrder(orderId)"
+          >
+            Cancel
+          </button>
+        </div>
+
+        <mat-divider></mat-divider>
+        <app-price-summary
+          [totalPrice]="orderDetail.orderTotalPrice"
+        ></app-price-summary>
+      </mat-card>
+    </div>
+  </div>
+</div>
